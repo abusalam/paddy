@@ -1,0 +1,418 @@
+/*PANEL TEMPLATE CSS */
+/*DESIGNED BY MHWEBDESIGNS */
+
+/*LINK TO LOAD GOOGLE FONTS. YOU CAN SELECT A DIFFERENT FONT IF YOU WISH. */
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700");
+
+/*SETS THE GLOBAL STYLING PARAMETERS*/
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+/*SETS THE PARAMETERS FOR EVERYTHING WITHIN THE BODY TAGS. THESE CAN BE OVERIDDEN BY OTHER ELEMENTS*/
+body {
+	font-family: 'Open Sans';
+	background-color: #F8FAEB;
+}
+
+/*GLOBAL LINK ATTRIBUTES FOR THE SITE*/
+a {
+	text-decoration: none;
+}
+
+/*HEADER STYLING. */
+#header{
+	width:100%;
+	height:50px;
+	background-color: #1568b4;
+	margin: -50px auto;
+	position: fixed;
+	z-index: 999;
+}
+
+/*SETS STYLING FOR LOGO ELEMENT */
+.logo {
+	float: left;
+	margin-top: 10px;
+	margin-left: 10px;
+	
+}
+
+.logo a {
+	font-size: 1.3em;
+	color: #fff;
+
+}
+
+.logo a span{
+	font-weight: 300;
+}
+
+/*STYLING FOR THE RIGHT HAND TEXT IN THE HEADER*/
+.powered{
+	float:right;
+	color: #fff;
+	margin-top: 30px;
+	margin-right: 5px;
+	font-size: 0.7em;
+}
+
+/*MAIN CONTAINER STYLING FOR THE TEMPLATE. THIS SHOULD ONLY BE TOUCHED IF YOU HAVE CSS EXPERIENCE AND ARE ALTERING FOR LOGO PARAMETERS */
+#container{
+	width:100%;
+	margin:50px auto;
+}
+
+/*SIDEBAR. WE RECOMMEND JUST CHAGING THE BACKGROUND COLOUR HERE. USE HEX CODES THAT CAN BE FOUND ALL OVER THE INTERNET */
+.sidebar{
+	width:150px;
+	background-color: #43749f;
+	float: left;
+	position: fixed;
+	margin-bottom: 10px;
+}
+
+ul#nav{
+
+}
+
+ul#nav li{
+	list-style: none;
+}
+
+
+ul#nav li a{
+	color:#ccc;
+	display: block;
+	padding: 10px;
+	font-size: 0.8em;
+	border-bottom: 1px solid #403D3E;
+	-webkit-transition:0.2s;
+	-moz-transition:0.2s;
+	-o-transition:0.2s;
+	transition:0.2s;
+}
+
+ul#nav li a:hover{
+	background-color: #4D494B;
+	color: #fff;
+	padding-left: 30px;
+}
+
+ul#nav li a.selected{
+	background-color: #030303;
+	color: #fff;
+	padding-left: 30px;
+
+}
+
+.content{
+	width: auto;
+	margin-top: 50px;
+	margin-left: 150px;
+	height: 100%;
+	background-color: #F8FAEB;
+	padding: 15px;
+	padding-top: 10px;
+
+}
+
+.content h1{
+	color: #171717; 
+	padding-top: 15px;
+}
+
+.content p{
+	color: #333031;
+	font-size: 1em;
+}
+
+#box{
+	margin-top: 15px;
+}
+
+#box .box-top{
+	color: #fff;
+	text-shadow: 0px 1px solid #000;
+	background-color: #575354;
+	padding: 5px;
+	padding-left: 15px;
+	font-weight: 300;
+}
+
+#box .box-pane{
+	
+	padding: 15px;
+	background-color: #fff;
+	color: #333;
+	display: inline-block;
+}
+
+#box .box-image img{
+	max-width: 100%;
+	padding: 5px;
+	margin-right: 10px;
+	display: block;
+	float: left;
+}
+
+a.mobile{
+	width: 100%;
+	height: 25px;
+	display: block;
+	color: #DCDDDE;
+	background-color: #343536;
+	text-align: center;
+	
+
+}
+
+a.mobile:active{
+	background-color: #4a4a4a;
+}
+a.menuclose{
+	width: 100%;
+	height: 25px;
+	display: block;
+	color: #fff;
+	background-color: #000;
+	text-align: center;
+	opacity: 0.4;
+	font-size: 0.9em;
+	padding-top: 2px;
+	
+
+}
+
+a.menuclose:active{
+	background-color: #4a4a4a;
+}
+
+#hold.glue {
+	width: 100%;
+    margin-top: 0 !important;
+    position: fixed;
+    top: 0;
+    z-index: 10000;
+    border-radius: 0 0 0.5em 0.5em;
+    opacity: 0.8;
+}
+
+#footer{
+	width: 100%;
+	height:75px;
+	margin-top: 10px;
+	margin-left: 0px;
+	margin-bottom: 10px;
+	padding: 10px;
+	background-color: #575354; 
+	z-index: 999;
+	text-align:center;
+	font-size:12px;
+
+
+
+}
+#footer p{
+	color: #fff;
+
+	
+}
+#footer p a{
+	color: #FF9912;
+	
+}
+
+
+@media only screen and (max-width:730px){
+	.sidebar{
+		width: 100%;
+		height: ;
+		display: none;
+		position: relative;
+	}
+
+	.content{
+		margin-left: 0px;
+		margin-top: 0px;	
+	}
+	.content p{
+		padding: 5px;
+		font-size: 0.8em;	
+	}
+	.content h1{
+	font-size: 1.3em; 
+	}
+	content h3{
+	padding: 5px; 
+	}
+
+	#header{
+		margin:0px auto;
+		position: relative;
+	}
+
+	#container{
+		margin:0px auto;
+	}
+
+	.powered{
+		display: none;
+	}
+
+	#box .box-image{
+	max-width:inherit;
+	height: auto;
+	object-fit: contain;
+	padding: 5px;
+	display: inline-block;
+	
+}
+
+
+	
+}
+
+@media only screen and (min-width:730px){
+	a.mobile{
+		display: none;
+		
+	}
+	a.mobilein{
+		display: none;
+		
+	}
+	a.menuclose{
+		display: none;
+		
+	}
+	a.menuclose{
+		display: none;
+		
+	}
+	.sidebar{
+		height: 100%;
+
+	}
+	}
+	
+	/*CSS for Login Message */
+	
+.msg {
+padding: 5px;
+width: 100%;
+margin: 2px;
+color: #c00;
+border: 1px solid #c00;
+background-color: #FEF1ED;
+font: bold 13px  verdana;
+
+} 
+ 
+.error {
+font: normal 11px arial, verdana;
+color: #c00;
+border: 1px solid #c00;
+padding: 2px;
+margin: 5px;
+float: left;
+background-color: #FEF1ED;
+}
+ 
+ .example {
+font: normal 10px arial;
+color: red;
+}
+.approved {
+font: normal 10px arial;
+color: green;
+}
+
+.loginform {
+font: 16px normal arial;
+background-color: #E6E6FA;
+font: normal 12px arial,verdana;
+padding: 10px;
+border: 1px solid #CAE4FF;
+}
+
+.loginform #txtbox {
+font: bold 16px arial;
+color: #f00;
+}
+.loginform #doLogin3 {
+font: bold 16px arial;
+color: #04B404;
+border-bottom-style:solid;
+border: 1px solid #006;
+background: #ffc;
+
+}
+
+.TFtable{
+		width:100%; 
+		border-collapse:collapse; 
+	}
+	.TFtable td{ 
+		padding:7px; border:#87CEFA 1px solid;
+	}
+	/* provide some minimal visual accomodation for IE8 and below */
+	.TFtable tr{
+		background: #bad5d9;
+	}
+	/*  Define the background color for all the ODD background rows  */
+	.TFtable tr:nth-child(odd){ 
+		background: #bad5d9;
+	}
+	/*  Define the background color for all the EVEN background rows  */
+	.TFtable tr:nth-child(even){
+		background: #ebf2f5;
+	}
+
+input[type="text"] {
+  display: block;
+  margin: 0;
+  font-family: sans-serif;
+  font-size: 18px;
+  appearance: none;
+  box-shadow: none;
+  border-radius: none;
+}
+select{
+  display: block;
+  margin: 0;
+  font-family: sans-serif;
+  font-size: 15px;
+  appearance: none;
+  box-shadow: none;
+  border-radius: none;
+}
+
+.clean-gray{
+border:solid 1px #f2c779;
+background:#FFFFCC;
+color:#222222;
+padding:4px;
+text-align:center;
+-moz-border-radius: 5px;
+border-radius: 5px;
+
+}
+
+.backmenu {
+	width:100%; height:25px; padding: 3px 3px 3px 3px; vertical-align:middle; margin-bottom:10px;
+}
+
+#approvemenu{
+	width: 100%;
+	height:30px;
+	margin-top: 2px;
+	margin-left: 0px;
+	margin-bottom: 2px;
+	padding: 3px;
+	background-color: #A2B5CD; 
+	z-index: 999;
+	font-size:12px;
+}
