@@ -1,0 +1,5 @@
+---
+deployment:
+ tasks:
+  - export DEPLOYPATH=/home/maldazil/public_html/~/paddy/
+  - git --work-tree=$DEPLOYPATH checkout -f master
