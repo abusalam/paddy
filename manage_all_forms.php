@@ -14,16 +14,18 @@ $GPMou = $_GET['gp'];
 
 <html>
 <head>
-
+ <meta charset="UTF-8">
 <title><? echo $pagetitle; ?></title> <!-- YOUR WEBSITE NAME -->
 
 <!-- DO NOT TOUCH THIS -->
 
 <link rel="stylesheet" type="text/css" href="css/style.css">
-<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 <meta name="viewport" content="width=device-width, initial-scale: 1.0, user-scaleable=no">
 <script src="scripts/jquery-1.12.3.min.js"></script>
-<script src="scripts/bootstrap.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous">
+</script>
 <script src="scripts/main.js"></script>
 
 </head>
@@ -204,8 +206,8 @@ while ($i < $num) {
         <td valign="top"><? echo $Amount; ?></td> -->
         <td valign="top">
           <button type="button"
-                class="btn btn-sm btn-secondary btn-toggle<? echo ($Paddy) ? ' active' : ''; ?>"
-                data-toggle="button" aria-pressed="true" autocomplete="off">
+                class="btn btn-sm btn-toggle btn-kcc<? echo ($Paddy) ? ' active' : ''; ?>"
+                data-toggle="button" data-appid="<? echo $AppID; ?>" aria-pressed="true" autocomplete="off">
             <div class="handle"></div>
           </button>
         </td>

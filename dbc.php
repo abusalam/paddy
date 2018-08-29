@@ -87,7 +87,7 @@ function page_protect() {
 			}
 
 		} else {
-			header("Location: login.php");
+			header("Location: /login.php");
 			exit();
 		}
 	}

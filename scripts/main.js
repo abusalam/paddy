@@ -38,8 +38,49 @@ $(function() {
 
 });
 
-	
+	$(".btn-kcc").on("click", function(){
 
+		//alert($(this).data("appid"));
+		//$(this).data("appid")
+		//$(this).removeClass('active');
+		//return false;
+		updatePaddy($(this).data("appid"),$(this).hasClass('active'),'KCC');
+	});
+
+	$(".btn-pmfby").on("click", function(){
+
+		//alert($(this).data("appid"));
+		//$(this).data("appid")
+		//$(this).removeClass('active');
+		//return false;
+		updatePaddy($(this).data("appid"),$(this).hasClass('active'),'PMFBY');
+	});
+
+var updatePaddy = function (AppID, Value,Scheme) {
+
+	$.ajax({
+    type: 'POST',
+    url: '/ajax/',
+    dataType: 'html',
+    xhrFields: {
+      withCredentials: true
+    },
+    data: {
+      'id' : AppID,
+      'val' :  Value,
+      'scheme' : Scheme
+    }
+  }).done(function (data) {
+    try {
+      //alert("Done:" + AppID + data);
+    }
+    catch (e) {
+      alert('Error:' + AppID + e);
+    }
+  }).fail(function (FailMsg) {
+    alert('Fail:' + AppID + FailMsg.statusText);
+  });
+};
 
 });
 

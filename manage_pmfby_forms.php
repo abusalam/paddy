@@ -20,7 +20,6 @@ $GPMou = $_GET['gp'];
 <!-- DO NOT TOUCH THIS -->
 
 <link rel="stylesheet" type="text/css" href="css/style.css">
-<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 <meta name="viewport" content="width=device-width, initial-scale: 1.0, user-scaleable=no">
 <script src="scripts/jquery-1.12.3.min.js"></script>
 <script src="scripts/bootstrap.min.js"></script>
@@ -206,8 +205,8 @@ while ($i < $num) {
         <td valign="top"><? echo $FID; ?></td>
         <td valign="top">
           <button type="button"
-          class="btn btn-sm btn-secondary btn-toggle<? echo ($Paddy) ? ' active' : ''; ?>"
-                  data-toggle="button" aria-pressed="true" autocomplete="off">
+          class="btn btn-sm btn-secondary btn-toggle btn-pmfby<? echo ($Paddy) ? ' active' : ''; ?>"
+                  data-toggle="button" data-appid="<? echo $AppID; ?>" aria-pressed="true" autocomplete="off">
             <div class="handle"></div>
           </button>
         </td>
