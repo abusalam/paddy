@@ -1,11 +1,16 @@
 <?php
+//ini_set('display_errors', '1');
+//error_reporting(E_ALL);
+
 include 'dbc.php';
 session_start();
+
 page_protect();
 $newp = $_GET['p'];
 $plimit = "250";
 $blkid = $_GET['blid'];
 $GPMou = $_GET['gp'];
+$farmerName = $_GET['farmer'];
 ?>
 
 
@@ -50,7 +55,7 @@ $GPMou = $_GET['gp'];
 
 
 		<div class="content">
-        <form id="NewApplicant" name="NewApplicant" method="get" action="manage_all_forms.php" >
+        <form id="NewApplicant" name="NewApplicant" method="get" action="manage_pmfby_forms.php" >
         <input type="hidden" name="blid" value="<? echo $blkid;?>" />
         <table width="100%" border="0" cellspacing="0" cellpadding="5">
   <tr>
@@ -59,7 +64,7 @@ $GPMou = $_GET['gp'];
     <option value="">Select GP</option>
 <?
 // code for search Block name //
-$query_gp="SELECT DISTINCT GP FROM PMFBYKCC  where Block ='$blkid' ORDER BY GP ASC";
+$query_gp="SELECT GP, count(*) as `Total` FROM PMFBYKCC where Block ='$blkid' Group By GP ORDER BY GP ASC";
 $result_gp = mysql_query($query_gp);
 while($row_gp = mysql_fetch_assoc($result_gp))
 {
@@ -67,11 +72,13 @@ while($row_gp = mysql_fetch_assoc($result_gp))
 
 	?>
 
-  <option value="<? echo $MouGP; ?>"><? echo $MouGP; ?> </option>
+  <option value="<? echo $MouGP; ?>"><? echo $MouGP . '(' . $row_gp['Total'] . ')'; ?> </option>
 
 <? }
 // End code for search BlockName //
 ?></select></td>
+    <td>Beneficiary Name:</td>
+    <td><input type="text" name="farmer" value="" /></td>
     <td width="67%"><input name="Search" value="Search" type="submit" /></td>
   </tr>
 </table>
@@ -79,9 +86,12 @@ while($row_gp = mysql_fetch_assoc($result_gp))
 			<p>
   <?
 
-if(empty($GPMou)){ $strSQL = mysql_query("SELECT * FROM PMFBYKCC WHERE Block='$blkid' and is_deleted= '0' "); } else {
+if(empty($GPMou)){ $strSQL = mysql_query("SELECT * FROM PMFBYKCC WHERE Block='$blkid' and is_deleted= '0' "); } elseif(empty($farmerName)) {
 
-$strSQL = mysql_query("SELECT * FROM PMFBYKCC WHERE Block='$blkid' and MouGP='$GPMou' and is_deleted= '0' "); }
+$strSQL = mysql_query("SELECT * FROM PMFBYKCC WHERE Block='$blkid' and GP='$GPMou' and is_deleted= '0' "); }
+else {
+
+$strSQL = mysql_query("SELECT * FROM PMFBYKCC WHERE Block='$blkid' and GP='$GPMou' and `Name` like '%$farmerName%' and is_deleted= '0' "); }
 
 $totalrows = mysql_num_rows($strSQL);
 $pnums = ceil ($totalrows/$plimit);
@@ -98,8 +108,9 @@ if ($totalrows - $start < $plimit) { $end_count = $totalrows;
 if ($totalrows - $end_count > $plimit) { $var2 = $plimit;
 } elseif ($totalrows - $end_count <= $plimit) { $var2 = $totalrows - $end_count; }
 
-if(empty($GPMou)){  $query="SELECT *  FROM PMFBYKCC WHERE Block='$blkid' and is_deleted= '0' ORDER BY ID DESC LIMIT $start,$plimit"; } else
-{  $query="SELECT *  FROM PMFBYKCC WHERE Block='$blkid' and MouGP='$GPMou' and is_deleted= '0' ORDER BY ID DESC LIMIT $start,$plimit"; }
+if(empty($GPMou)){  $query="SELECT *  FROM PMFBYKCC WHERE Block='$blkid' and is_deleted= '0' ORDER BY ID DESC LIMIT $start,$plimit"; } elseif(empty($farmerName))
+{  $query="SELECT *  FROM PMFBYKCC WHERE Block='$blkid' and GP='$GPMou' and is_deleted= '0' ORDER BY ID DESC LIMIT $start,$plimit"; } else
+{  $query="SELECT *  FROM PMFBYKCC WHERE Block='$blkid' and GP='$GPMou' and `Name` like '%$farmerName%' and is_deleted= '0' ORDER BY ID DESC LIMIT $start,$plimit"; }
 $result=mysql_query($query);
 
 $num=mysql_numrows($result);
@@ -183,15 +194,15 @@ while ($i < $num) {
 	$BankName = mysql_result($result, $i, "BankName");
 	$BankCode = mysql_result($result, $i, "BankCode");
 	$BankBranch = mysql_result($result, $i, "BankBranch");
-	$BranchCode = mysql_result($result, $i, "BranchCode");
+	$BranchCode = ''; //mysql_result($result, $i, "BranchCode");
 	$IFSC = mysql_result($result, $i, "IFSC");
 	$ExistingLoan = mysql_result($result, $i, "ExistingLoan");
-	$LoanNo = mysql_result($result, $i, "LoanNo");
+	$LoanNo = ''; //mysql_result($result, $i, "LoanNo");
 	$LoanDate = mysql_result($result, $i, "LoanDate");
 	$LoanType = mysql_result($result, $i, "LoanType");
 	$LoanAmount = mysql_result($result, $i, "LoanAmount");
 	$FathersName = mysql_result($result, $i, "FatherName");
-	$AadharNo = mysql_result($result, $i, "AadharNo");
+	$AadharNo = ''; //mysql_result($result, $i, "AadharNo");
 	$Paddy = (mysql_result($result, $i, "paddy") > 0) ? true : false;
 	?>
 

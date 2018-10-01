@@ -1,4 +1,7 @@
 <?php
+//ini_set('display_errors', '1');
+//error_reporting(E_ALL);
+
 include 'dbc.php';
 session_start();
 page_protect();
@@ -6,6 +9,7 @@ $newp = $_GET['p'];
 $plimit = "250";
 $blkid = $_GET['blid'];
 $GPMou = $_GET['gp'];
+$farmerName = $_GET['farmer'];
 ?>
 
 
@@ -57,12 +61,12 @@ $GPMou = $_GET['gp'];
         <input type="hidden" name="blid" value="<? echo $blkid;?>" />
         <table width="100%" border="0" cellspacing="0" cellpadding="5">
   <tr>
-    <td width="11%">Filter By GP</td>
-    <td width="22%"><select name="gp" id="gp" class="required">
+    <td>Filter By GP:</td>
+    <td><select name="gp" id="gp" class="required">
     <option value="">Select GP</option>
 <?
 // code for search Block name //
-$query_gp="SELECT DISTINCT MouGP FROM AgricultureKCC  where BlockID ='$blkid' ORDER BY MouGP ASC";
+$query_gp="SELECT MouGP, count(*) as `Total` FROM AgricultureKCC where BlockID ='$blkid' group by MouGP ORDER BY MouGP ASC";
 $result_gp = mysql_query($query_gp);
 while($row_gp = mysql_fetch_assoc($result_gp))
 {
@@ -70,11 +74,13 @@ while($row_gp = mysql_fetch_assoc($result_gp))
 
 	?>
 
-  <option value="<? echo $MouGP; ?>"><? echo $MouGP; ?> </option>
+  <option value="<? echo $MouGP; ?>"><? echo $MouGP . ' ('.$row_gp['Total'].')'; ?> </option>
 
 <? }
 // End code for search BlockName //
 ?></select></td>
+              <td>Beneficiary Name:</td>
+              <td><input type="text" name="farmer" value="" /></td>
     <td width="67%"><input name="Search" value="Search" type="submit" /></td>
   </tr>
 </table>
@@ -82,9 +88,13 @@ while($row_gp = mysql_fetch_assoc($result_gp))
 			<p>
   <?
 
-if(empty($GPMou)){ $strSQL = mysql_query("SELECT * FROM AgricultureKCC WHERE BlockID='$blkid' and is_deleted= '0' "); } else {
-
-$strSQL = mysql_query("SELECT * FROM AgricultureKCC WHERE BlockID='$blkid' and MouGP='$GPMou' and is_deleted= '0' "); }
+if(empty($GPMou)) {
+  $strSQL = mysql_query("SELECT * FROM AgricultureKCC WHERE BlockID='$blkid' and is_deleted= '0' ");
+} elseif(empty($farmerName)) {
+  $strSQL = mysql_query("SELECT * FROM AgricultureKCC WHERE BlockID='$blkid' and MouGP='$GPMou' and is_deleted= '0' ");
+} else {
+  $strSQL = mysql_query("SELECT * FROM AgricultureKCC WHERE BlockID='$blkid' and MouGP='$GPMou' and `BeneficiaryName` like '%$farmerName%' and is_deleted= '0' ");
+}
 
 $totalrows = mysql_num_rows($strSQL);
 $pnums = ceil ($totalrows/$plimit);
@@ -101,8 +111,14 @@ if ($totalrows - $start < $plimit) { $end_count = $totalrows;
 if ($totalrows - $end_count > $plimit) { $var2 = $plimit;
 } elseif ($totalrows - $end_count <= $plimit) { $var2 = $totalrows - $end_count; }
 
-if(empty($GPMou)){  $query="SELECT *  FROM AgricultureKCC WHERE BlockID='$blkid' and is_deleted= '0' ORDER BY ID DESC LIMIT $start,$plimit"; } else
-{  $query="SELECT *  FROM AgricultureKCC WHERE BlockID='$blkid' and MouGP='$GPMou' and is_deleted= '0' ORDER BY ID DESC LIMIT $start,$plimit"; }
+if(empty($GPMou)) {
+  $query="SELECT *  FROM AgricultureKCC WHERE BlockID='$blkid' and is_deleted= '0' ORDER BY ID DESC LIMIT $start,$plimit";
+} elseif(empty($farmerName)) {
+  $query="SELECT *  FROM AgricultureKCC WHERE BlockID='$blkid' and MouGP='$GPMou' and is_deleted= '0' ORDER BY ID DESC LIMIT $start,$plimit";
+} else {
+  $query = "SELECT * FROM AgricultureKCC WHERE BlockID='$blkid' and MouGP='$GPMou' and `BeneficiaryName` like '%$farmerName%' and is_deleted= '0' ORDER BY ID DESC LIMIT $start,$plimit";
+}
+
 $result=mysql_query($query);
 
 $num=mysql_numrows($result);
@@ -266,9 +282,6 @@ $i++;
 
 
 		<!-- END -->
-    https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css
-    https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js
-https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.bundle.min.js
 </body>
 
 </html>
